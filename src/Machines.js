@@ -1,7 +1,36 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import './Machines.css';
 
-export default function Machines () {
-	return (
-		<div>Machines view</div>
-	);
+// export default function Machines () {
+// 	return (
+// 		<div>Machines view</div>
+// 	);
+// }
+
+const mapStateToProps = (state) => {
+	return {
+		machines: state.machine
+	}
 }
+
+/* eslint-disable react/prop-types */
+class Machines extends React.Component {
+
+	render() {		
+		return <div>
+			<table className="TFtable">
+				<thead>
+					<tr><th>Name</th><th>IP Address</th><th>Health</th></tr>
+				</thead>
+				<tbody>
+					{ this.props.machines.map((m) => <tr key={m.id}><td><Link to={`/machines/${m.id}`}>{m.name}</Link></td><td>{m.ip_address}</td><td><div className="progress"><div style={{width:m.health+'%'}}></div></div></td></tr>) }
+				</tbody>
+			</table>
+		</div>
+	}
+}
+
+/* eslint-enable react/prop-types */
+export default connect(mapStateToProps)(Machines);

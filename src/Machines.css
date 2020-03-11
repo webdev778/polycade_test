@@ -1,0 +1,40 @@
+
+.TFtable{
+    width:100%; 
+    border-collapse:collapse; 
+  }
+  .TFtable td, .TFtable th{
+    padding: 10px;
+  }
+  .TFtable thead tr {
+    text-align: left;
+    background: none !important;
+    border: none !important;
+  }
+  .TFtable td{ 
+    border:none;
+  }
+  /* provide some minimal visual accomodation for IE8 and below */
+  .TFtable tr{
+    background: #b8d1f3;
+    border:1px solid;
+  }
+  /*  Define the background color for all the ODD background rows  */
+  .TFtable tr:nth-child(odd){ 
+    background: white;
+  }
+  /*  Define the background color for all the EVEN background rows  */
+  .TFtable tr:nth-child(even){
+    background: lightgrey;
+  }
+  .progress{
+    width:100%;
+    height:20px; 
+    border:1px solid grey;
+  }
+  
+  .progress div {
+    height:100%; 
+    background:grey;
+  }
+  
