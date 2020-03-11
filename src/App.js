@@ -5,21 +5,12 @@ import {
 	Switch,
 	Link
 } from 'react-router-dom';
-import axios from 'axios';
-import { fetchMachineList } from './store/machine';
-import store from './store'
 import Machines from './Machines';
 import Machine from './Machine';
 import './App.css';
 
+/* eslint-disable react/prop-types */
 class App extends React.Component {
-	async UNSAFE_componentWillMount() {
-		console.log('App -- WillMount Start');
-		const { data: result }  = await axios.get('http://localhost:8080/machines');
-		console.log('App -- WillMount Data Fetched' );
-		store.dispatch(fetchMachineList(result));
-		console.log('App -- WillMount End' );
-	}
 	render() {
 		console.log('App -- Render');
 		return (
@@ -35,8 +26,7 @@ class App extends React.Component {
 					</nav>
 
 					<Switch>
-						<Route path='/machines/:id' component={Machine}>
-						</Route>
+						<Route path='/machines/:id' component={Machine} />
 						<Route path='/machines'>
 							<Machines />
 						</Route>

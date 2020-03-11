@@ -4,6 +4,12 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
-// import './socket';
+import './socket';
+import { fetchMachineListThunk } from './store/machine';
+import axios from 'axios';
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
+store.dispatch(fetchMachineListThunk()).then(
+    function(){
+        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
+    }
+)
