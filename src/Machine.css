@@ -1,27 +1,10 @@
-h1, h2, h3{
-    display: flex;
-    flex: 1 1 100%
-  }
-  .pannel{
-    width: 50%;
-    margin: 1rem;
-  }
-  .healthWrapper{
-    background: lightgrey;
-    padding: 1rem;
-    border: 1px solid;
-    min-width: 350px;
-  }
-  
-  .progressOutter{
-    background: white;
-    border: 1px solid;
-    height: 20px;
-    padding: 0;
-  }
-  
-  .progressInner {
-    background: grey;
-    width: 50%;
-    height: 100%;
-  }
+.pannel {
+	width: 40%;
+	margin: 1rem;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.field {
+	display: block;
+}

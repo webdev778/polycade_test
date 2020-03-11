@@ -1,0 +1,38 @@
+.indicator {
+    font-size: 2rem;
+    text-align: center;
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.healthWrapper {
+	background: lightgrey;
+	padding: 1rem;
+	border: 1px solid;
+	min-width: 350px;
+}
+
+.progressOutter {
+	background: white;
+	border: 1px solid;
+	height: 20px;
+	padding: 0;
+}
+
+.progressInner {
+	background: grey;
+	width: 50%;
+	height: 100%;
+}
+
+.bg50 {
+    background: #D9534F !important;
+}
+
+.bg70 {
+    background: #f0ad4e !important;
+}
+
+.bg100 {
+    background: #5cb85c !important;
+}

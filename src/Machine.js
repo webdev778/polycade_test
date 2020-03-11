@@ -1,14 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchMachineInfoPending, 
-         fetchMachineInfoFailure, 
-         fetchMachineInfoSuccess
-} from './store/test';
-
-import { updateMachineInfo } from './store/machine';
-
+import { updateMachine } from './store/machine';
 import './Machine.css';
+import Health from './Health';
 
 const mapStateToProps = function (state) {
     return { machines: state.machine }
@@ -16,10 +11,7 @@ const mapStateToProps = function (state) {
 
 const mapActionsToProps = function (dispatch) {
   return { 
-    fetchPending: () => dispatch(fetchMachineInfoPending()),
-    fetchFailure: (err) => dispatch(fetchMachineInfoFailure(err)),
-    fetchSuccess: (resp) => dispatch(fetchMachineInfoSuccess(resp)),
-    updateName: (id, name) => dispatch(updateMachineInfo(id, {name}))
+    updateName: (id, name) => dispatch(updateMachine(id, {name}))
   }
 }
 
@@ -28,25 +20,30 @@ class Machine extends React.Component {
 
     nameInput = React.createRef();
     state = {
-      id: null,
-      name: null,
-      ip_address: null,
-      health: null
+      id: this.props.match.params.id
     }
 
     handleUpdateName = async () => {
       const newName = this.nameInput.current.value;
-      const { id } = this.props.match.params;
+      const { id } = this.state;
       if(newName){
-        const result = await axios.put(`http://localhost:8080/machines/${id}`, { name: newName });
         this.props.updateName(id, newName);
       }
     }
 
     getMachineInfo = () => {
-      const { id } = this.props.match.params;        
+      const { id } = this.state;       
       return this.props.machines.find(m => m.id === id);
     }
+
+    shouldComponentUpdate(nextProps, nextState){
+      const { id } = this.state;
+      
+      const m = this.getMachineInfo();
+      const m1 = nextProps.machines.find(m => m.id === id)
+
+      return m.health !== m1.health
+    } 
 
     render() {
         console.log('Machine -- Render Start');  
@@ -59,21 +56,18 @@ class Machine extends React.Component {
           <h2>{ name }</h2>
           <div className="pannel">
             <h3> Update Device </h3>
-            <label>Name: </label>
-            <input type="text" ref={this.nameInput} />
-            <button type="submit" onClick={this.handleUpdateName}> submit </button>
-          </div>
-          <div className="pannel">
-            <div className="healthWrapper">
-              <h1> { health } </h1>
-              <div className="progressOutter">
-                <div className="progressInner" style={{width: health+'%'}}></div>
-              </div>
+            <div className="field">
+              <label>Name: </label>
+              <input type="text" ref={this.nameInput} />
+              <button type="submit" onClick={this.handleUpdateName}> submit </button>
             </div>
           </div>
           <div className="pannel">
+            <Health value={health} indicator="true" />
+            <div className="pannel">
             <h3> Status </h3>
             <label>IP Addresss: </label> <span> {ip} </span>
+          </div>            
           </div>
         </div>;
     }
