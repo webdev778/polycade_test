@@ -19,6 +19,11 @@
     background: #b8d1f3;
     border:1px solid;
   }
+
+  .TFtable tbody tr:hover{
+    background: grey;
+    border:1px solid;
+  }
   /*  Define the background color for all the ODD background rows  */
   .TFtable tr:nth-child(odd){ 
     background: white;

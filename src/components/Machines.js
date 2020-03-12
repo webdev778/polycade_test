@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "./Machines.css";
 import Health from "./Health";
 
@@ -17,12 +16,12 @@ export default function Machines({data, onSelect}) {
 		<div>
 			<table className="TFtable">
 				<thead>
-          <tr>
-            <th>Name</th>
-            <th>IP Address</th>
-            <th>Health</th>
-          </tr>
-        </thead>
+				<tr>
+					<th>Name</th>
+					<th>IP Address</th>
+					<th>Health</th>
+				</tr>
+				</thead>
 				<tbody>
 					{
 						items

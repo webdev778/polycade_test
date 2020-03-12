@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import store from './store';
 import './socket';
 import { getAllMachines } from './store/machine';
-import axios from 'axios';
 
 
 store.dispatch(getAllMachines()).then(
