@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
-// import './socket';
+import './socket';
 import { getAllMachines } from './store/machine';
 import axios from 'axios';
 
