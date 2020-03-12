@@ -7,14 +7,12 @@ ws.onopen = function open(){
     console.log('WebScoket is established');
 };
 
-ws.onmessage = function msg(event){
-    console.log(`[SOCKET_DATA] : ${event.data}`);
-    
+ws.onmessage = function msg(event){   
     const { data } = event;
     const msg = JSON.parse(data);
-
+    
+    console.log(`[SOCKET][${msg.type}] : ${event.data}`);
     if(msg){
-        console.log(msg.type);
         switch ( msg.type ) {
             case 'HEALTH_UPDATE':
                 store.dispatch(updateMachineSocket(

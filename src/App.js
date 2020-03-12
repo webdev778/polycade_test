@@ -5,8 +5,8 @@ import {
 	Switch,
 	Link
 } from 'react-router-dom';
-import Machines from './Machines';
-import Machine from './Machine';
+import MachinesContainer from './containers/MachinesContainer';
+import MachineContainer from './containers/MachineContainer';
 import './App.css';
 
 /* eslint-disable react/prop-types */
@@ -26,9 +26,9 @@ class App extends React.Component {
 					</nav>
 
 					<Switch>
-						<Route path='/machines/:id' component={Machine} />
+						<Route path='/machines/:id' component={MachineContainer}/>
 						<Route path='/machines'>
-							<Machines />
+							<MachinesContainer />
 						</Route>
 					</Switch>
 				</div>

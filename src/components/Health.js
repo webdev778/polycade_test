@@ -3,10 +3,7 @@ import './Health.css';
 
 /* eslint-disable react/prop-types */
 export default function Health({value, indicator}) {
-
     let col;
-
-    if(value > 100) value = 100;
 
     if( 0 <= value && value < 50) col = "bg50";
     else if( 50 <= value && value < 70) col = "bg70";
