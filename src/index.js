@@ -5,10 +5,11 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
 import './socket';
-import { fetchMachineListThunk } from './store/machine';
+import { getAllMachines } from './store/machine';
 import axios from 'axios';
 
-store.dispatch(fetchMachineListThunk()).then(
+
+store.dispatch(getAllMachines()).then(
     function(){
         ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
     }

@@ -13,7 +13,7 @@ export default function Health({value, indicator}) {
     else col = "bg100";
 
 	return (
-		<div className={ indicator && "healthWrapper" }>
+		<div className={ indicator ? "healthWrapper" : undefined}>
 			{indicator && <div className="indicator"> {value} </div> }
 			<div className="progressOutter">
 				<div

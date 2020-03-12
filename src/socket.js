@@ -1,5 +1,5 @@
 import store from './store';
-import { updateMachineInfo } from './store/machine';
+import { updateMachineSocket } from './store/machine';
 
 const ws = new WebSocket('ws://localhost:1337');
 
@@ -17,7 +17,7 @@ ws.onmessage = function msg(event){
         console.log(msg.type);
         switch ( msg.type ) {
             case 'HEALTH_UPDATE':
-                store.dispatch(updateMachineInfo(
+                store.dispatch(updateMachineSocket(
                     msg.id,
                     { health: msg.health }
                 ));

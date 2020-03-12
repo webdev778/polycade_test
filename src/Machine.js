@@ -6,7 +6,7 @@ import './Machine.css';
 import Health from './Health';
 
 const mapStateToProps = function (state) {
-    return { machines: state.machine }
+    return { machines: state.machine.data }
 }
 
 const mapActionsToProps = function (dispatch) {

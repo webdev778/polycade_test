@@ -1,11 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import penderMiddleware, { penderReducer } from 'redux-pender';
 import machine from './machine';
-import test from './test';
 
-const store = createStore(combineReducers({machine, test}),         
+const store = createStore(combineReducers({machine, pender: penderReducer}),
         compose(
-            applyMiddleware(thunk),
+            applyMiddleware(penderMiddleware()),
             window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
         )
     );

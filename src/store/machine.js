@@ -1,55 +1,81 @@
-import { createStore } from 'redux';
-import * as api from '../api';
+import { createStore } from "redux";
+import { createAction, handleActions } from "redux-actions";
+import { pender } from "redux-pender";
+import * as api from "../api";
 
 // ACTION_TYPE
-
-const ADD_MACHINE = 'ADD_MACHINE';
-const FETCH_MACHINE_LIST = 'FETCH_MACHINE_LIST';
-const UPDATE_MACHINE_INFO = 'UPDATE_MACHINE_INFO';
+const GET_ALL_MACHINES = "machine/GET_ALL_MACHINES";
+const GET_MACHINE = "machine/GET_MACHINE";
+const UPDATE_MACHINE = "machine/UPDATE_MACHINE";
+const UPDATE_MACHINE_SOCKET = "machine/UPDATE_MACHINE_SOCKET";
 
 // ACTIONS
-
-export const addMachine = (payload) => ({ type: ADD_MACHINE, payload });
-export const fetchMachineList = (payload) => ({ type: FETCH_MACHINE_LIST, payload });
-export const updateMachineInfo = (id, payload) => ({ type: UPDATE_MACHINE_INFO, id, payload });
-
-// REDUX-THUNK
-export const updateMachine = (id, data) => {
-
-    return (dispatch) => {
-            //dispatch({type: UPDATE_MACHINE_INFO_PENDING});
-            return api.updateMachineInfo(id, data)
-            .then((result)=>{
-                dispatch(updateMachineInfo(id, data));
-            }).catch(e=>{
-                //dispatch({type: UPDATE_MACHINE_INFO_FAILED, error:e});
-            });                        
-    }
-}
-
-export const fetchMachineListThunk = () => {
-    return dispatch => {
-        return api.getMachineList().then(
-            (resp) => dispatch(fetchMachineList(resp.data))
-        )
-    }
-}
-
+export const getAllMachines = createAction(GET_ALL_MACHINES, api.getAllMachines);
+export const getMachine = createAction(GET_MACHINE, api.getMachineById);
+export const updateMachine = createAction(UPDATE_MACHINE, api.updateMachine);
+export const updateMachineSocket = createAction(UPDATE_MACHINE_SOCKET, (id, data) => ({ id, data }));
 
 // INIT STATE
-
-const initialState = [];
+const initialState = {
+	fetching: false,
+	fetched: false,
+	data: [],
+	error: null
+};
 
 // REDUCER
-export default function reducer( state = initialState, action ) {
-    switch (action.type){
-        case ADD_MACHINE:
-            return [...state, action.payload];
-        case FETCH_MACHINE_LIST:
-            return action.payload;
-        case UPDATE_MACHINE_INFO:            
-            return state.map(m => m.id === action.id ? {...m, ...action.payload} : m);
-        default:
-            return state;
-    }
-}
+const rmap = (o_ary, k, n_e) =>
+	o_ary.map(e => (e.id === k ? { ...e, ...n_e } : e));
+
+export default handleActions(
+	{   
+		...pender({
+			type: GET_ALL_MACHINES,
+			onSuccess: (state, action) => ({
+				...state,
+				fetched: true,
+				fetching: false,
+				data: action.payload.data
+			}),
+			onPending: (state, action) => ({ ...state, fetching: true }),
+			onFailure: (state, action) => ({
+				...state,
+				error: action.payload.error
+			})
+		}),
+		...pender({
+			type: GET_MACHINE,
+			onSuccess: (state, action) => ({
+				...state,
+				fetched: true,
+				fetching: false,
+				data: rmap(state.data, action.payload.id, action.payload.data)
+			}),
+			onPending: (state, action) => ({ ...state, fetching: true }),
+			onFailure: (state, action) => ({
+				...state,
+				error: action.payload.error
+			})
+		}),
+		...pender({
+			type: UPDATE_MACHINE,
+			onSuccess: (state, action) => ({
+				...state,
+				fetched: true,
+				fetching: false,
+				data: rmap(state.data, action.payload.id, action.payload.info)
+			}),
+			onPending: (state, action) => ({ ...state, fetching: true }),
+			onFailure: (state, action) => ({
+				...state,
+				error: action.payload.error
+			})
+    }),
+
+		[UPDATE_MACHINE_SOCKET]: (state, action) => {
+      const {id, data} = action.payload
+			return {...state, data: rmap(state.data, id, data)};
+    },        
+	},
+	initialState
+);

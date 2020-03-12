@@ -6,7 +6,7 @@ import Health from "./Health";
 
 const mapStateToProps = state => {
 	return {
-		machines: state.machine
+		machines: state.machine.data
 	};
 };
 
