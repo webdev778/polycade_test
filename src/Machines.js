@@ -4,45 +4,27 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Machines.css';
 import { 
-    fetchMachineListPending, 
-    fetchMachineListFailure, 
-    fetchMachineListSuccess
+    fetchMachineList, 
 } from './store/machine';
 
 const mapStateToProps = (state) => {
 	return {
-		machines: state.data,
-		loading: state.loading
+		machines: state.machine.data,
+		loading: state.machine.loading
 	}
 }
 
 const mapActionsToProps = function (dispatch) {
     return { 
-      fetchPending: () => dispatch(fetchMachineListPending()),
-      fetchFailure: (err) => dispatch(fetchMachineListFailure(err)),
-      fetchSuccess: (resp) => dispatch(fetchMachineListSuccess(resp))
+        fetchMachineList: () => dispatch(fetchMachineList()),
     }
   }
 
 /* eslint-disable react/prop-types */
 class Machines extends React.Component {
 
-    async UNSAFE_componentWillMount() {       
-        this.props.fetchPending();
-        try{
-			const { data: result }  = await axios.get('http://localhost:8080/machines');   
-			/*			
-			await new Promise(resolve  => {
-				setTimeout(()=>{
-					resolve();
-				}, 3000);
-			});
-			*/
-            // Dispatch action to update redux store
-            this.props.fetchSuccess(result);
-        }catch( err ){
-            this.props.fetchFailure( err );
-        }
+    UNSAFE_componentWillMount() {       
+        this.props.fetchMachineList();
 	}
 		
 	render() {		
