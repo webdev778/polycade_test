@@ -9,7 +9,8 @@ const UPDATE_MACHINE_HEALTH = 'UPDATE_MACHINE_HELATH';
 const UPDATE_MACHINE_INFO = 'UPDATE_MACHINE_INFO';
 
 // ACTIONS
-export const fetchMachineList = () => ({ type: FETCH_MACHINE_LIST, payload: axios.get('/machines')});
+export const fetchMachineList = () => ({ type: FETCH_MACHINE_LIST, payload: axios.get('/machines').then(
+                                                                                    (resp) => new Promise(resolve=> setTimeout(() => resolve(resp), 3000)))});
 
 export const updateMachineHealth = (payload) => ({ type: UPDATE_MACHINE_HEALTH, payload });
 export const updateMachineInfo = (id, payload) => ({ type: UPDATE_MACHINE_INFO, id, payload });
