@@ -8,20 +8,17 @@ const GET_ALL_MACHINES = "machine/GET_ALL_MACHINES";
 const GET_MACHINE = "machine/GET_MACHINE";
 const UPDATE_MACHINE = "machine/UPDATE_MACHINE";
 const UPDATE_MACHINE_SOCKET = "machine/UPDATE_MACHINE_SOCKET";
-const SET_CURRENT = "machine/SET_CURRENT";
 
 // ACTIONS
 export const getAllMachines = createAction(GET_ALL_MACHINES, api.getAllMachines);
 export const getMachine = createAction(GET_MACHINE, api.getMachineById);
 export const updateMachine = createAction(UPDATE_MACHINE, api.updateMachine);
 export const updateMachineSocket = createAction(UPDATE_MACHINE_SOCKET, (id, data) => ({ id, data }));
-export const setCurrent = createAction(SET_CURRENT);
 
 // INIT STATE
 const initialState = {
 	fetching: false,
 	fetched: false,
-	current: null,
 	data: [],
 	error: null
 };
@@ -51,8 +48,7 @@ export default handleActions(
 			onFailure: (state, action) => ({...state, error: action.payload.error})
     	}),
 
-		[UPDATE_MACHINE_SOCKET]: (state, action) => ({...state, data: rmap(state.data, action.payload.id, action.payload.data)}),
-		[SET_CURRENT]: (state, action) => ({...state, current: action.payload})
+		[UPDATE_MACHINE_SOCKET]: (state, action) => ({...state, data: rmap(state.data, action.payload.id, action.payload.data)})
 	},
 	initialState
 );

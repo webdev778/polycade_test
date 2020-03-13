@@ -6,7 +6,7 @@ import Health from './Health';
 export default function Machine ({data, updateHandler}) {
 
     const nameInput = React.createRef();
-    console.log('Machine -- Render Start');  
+    // console.log('Machine -- Render Start');  
     const { name, health, ip_address: ip } = (data || {});
 
     return <div className="pannel-container">
