@@ -4,12 +4,9 @@ import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './store';
-import './socket';
+// import './socket';
 import { getAllMachines } from './store/machine';
 
 
-store.dispatch(getAllMachines()).then(
-    function(){
-        ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
-    }
-)
+store.dispatch(getAllMachines());
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))

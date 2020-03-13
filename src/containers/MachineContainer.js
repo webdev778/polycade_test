@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as machineActions from '../store/machine';
@@ -23,7 +23,10 @@ class MachineContainer extends React.Component {
     }
 
     render() {
-        return <Machine data={this.props.data} updateHandler={this.handleUpdateName}/>
+        console.log('MachineContainer Render');
+        return <Fragment>
+                { this.props.data && <Machine data={this.props.data} updateHandler={this.handleUpdateName}/> }
+            </Fragment>
     }
 }
 /* eslint-enable react/prop-types */

@@ -35,8 +35,8 @@ export default handleActions(
 		...pender({
 			type: GET_ALL_MACHINES,
 			onSuccess: (state, action) => ({...state, fetched: true, fetching: false, data: action.payload.data}),
-			onPending: (state, action) => ({ ...state, fetching: true }),
-			onFailure: (state, action) => ({...state, error: action.payload.error})
+			onPending: (state, action) => ({ ...state, fetching: true, fetched: false }),
+			onFailure: (state, action) => ({...state, fetching: false, fetched: false, error: action.payload.error})
 		}),
 		...pender({
 			type: GET_MACHINE,

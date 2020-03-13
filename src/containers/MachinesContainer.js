@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
@@ -7,21 +7,25 @@ import { setCurrent } from '../store/machine';
 
 
 /* eslint-disable react/prop-types */
-function MachinesContainer({machines, changeCurrent, history}) {
+function MachinesContainer({machines, changeCurrent, history, fetched}) {
 	const handleSelect = (id, e) => {
 		// e.stopPropagation();
 		changeCurrent(id);
 		history.push(`/machines/${id}`);
 	}
 
+	console.log('MachinesContainer Render');
 	return (
-		<Machines data={machines} onSelect={handleSelect}/>
+		<Fragment>
+			{ fetched && <Machines data={machines} onSelect={handleSelect}/> }
+		</Fragment>
 	);
 }
 /* eslint-enable react/prop-types */
 
 export default connect((state) => ({
-	machines: state.machine.data
+	machines: state.machine.data,
+	fetched: state.machine.fetched
 }), (dispatch) => ({
 	changeCurrent: bindActionCreators(setCurrent, dispatch)
 }))(withRouter(MachinesContainer));

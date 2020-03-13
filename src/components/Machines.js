@@ -4,6 +4,7 @@ import Health from "./Health";
 
 /* eslint-disable react/prop-types */
 export default function Machines({data, onSelect}) {	
+	console.log('Machines Render');
 	const items = data.map(m => (
 		<tr key={m.id} onClick={(e) => onSelect(m.id, e)}>
 			<td>{m.name}</td>
