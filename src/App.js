@@ -13,13 +13,13 @@ import Machine from './Machine';
 import './App.css';
 
 class App extends React.Component {
-	async UNSAFE_componentWillMount() {
-		console.log('App -- WillMount Start');
-		const { data: result }  = await axios.get('http://localhost:8080/machines');
-		console.log('App -- WillMount Data Fetched' );
-		store.dispatch(fetchMachineList(result));
-		console.log('App -- WillMount End' );
-	}
+	// async UNSAFE_componentWillMount() {
+	// 	console.log('App -- WillMount Start');
+	// 	const { data: result }  = await axios.get('http://localhost:8080/machines');
+	// 	console.log('App -- WillMount Data Fetched' );
+	// 	store.dispatch(fetchMachineList(result));
+	// 	console.log('App -- WillMount End' );
+	// }
 	render() {
 		console.log('App -- Render');
 		return (

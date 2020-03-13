@@ -1,24 +1,17 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchMachineInfoPending, 
-         fetchMachineInfoFailure, 
-         fetchMachineInfoSuccess
-} from './store/test';
 
 import { updateMachineInfo } from './store/machine';
 
 import './Machine.css';
 
 const mapStateToProps = function (state) {
-    return { machines: state.machine }
+    return { machines: state.data }
 }
 
 const mapActionsToProps = function (dispatch) {
   return { 
-    fetchPending: () => dispatch(fetchMachineInfoPending()),
-    fetchFailure: (err) => dispatch(fetchMachineInfoFailure(err)),
-    fetchSuccess: (resp) => dispatch(fetchMachineInfoSuccess(resp)),
     updateName: (id, name) => dispatch(updateMachineInfo(id, {name}))
   }
 }
