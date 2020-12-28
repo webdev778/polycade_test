@@ -31,7 +31,8 @@
 		"server": "node server/index.js",
 		"start": "cross-env EXTEND_ESLINT=true react-scripts start",
 		"build": "cross-env EXTEND_ESLINT=true react-scripts build",
-		"test": "react-app-rewired test"
+		"test": "react-app-rewired test",
+		"format": "eslint --fix ./"
 	},
 	"browserslist": {
 		"production": [

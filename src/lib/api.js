@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getAllMachines = () => axios.get('/machines');
 export const getMachineById = (id) => axios.get(`/machines/${id}`);

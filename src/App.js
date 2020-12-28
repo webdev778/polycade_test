@@ -10,7 +10,7 @@ import MachineContainer from './containers/MachineContainer';
 import './App.css';
 
 /* eslint-disable react/prop-types */
-export default  function App () {
+export default function App () {
 	console.log('App -- Render');
 	return (
 		<Router>

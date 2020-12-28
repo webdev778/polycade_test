@@ -9,4 +9,4 @@ import { getAllMachines } from './store/machine';
 
 
 store.dispatch(getAllMachines());
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'))
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

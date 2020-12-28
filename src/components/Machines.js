@@ -1,9 +1,9 @@
-import React from "react";
-import "./Machines.css";
-import Health from "./Health";
+import React from 'react';
+import './Machines.css';
+import Health from './Health';
 
 /* eslint-disable react/prop-types */
-export default function Machines({data, onSelect}) {	
+export default function Machines ({data, onSelect}) {
 	// console.log('Machines Render');
 	const items = data.map(m => (
 		<tr key={m.id} onClick={(e) => onSelect(m.id)}>
@@ -17,11 +17,11 @@ export default function Machines({data, onSelect}) {
 		<div>
 			<table className="TFtable">
 				<thead>
-				<tr>
-					<th>Name</th>
-					<th>IP Address</th>
-					<th>Health</th>
-				</tr>
+					<tr>
+						<th>Name</th>
+						<th>IP Address</th>
+						<th>Health</th>
+					</tr>
 				</thead>
 				<tbody>
 					{

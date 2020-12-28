@@ -1,13 +1,12 @@
-import { createStore } from "redux";
-import { createAction, handleActions } from "redux-actions";
-import { pender } from "redux-pender";
-import * as api from "../lib/api";
+import { createAction, handleActions } from 'redux-actions';
+import { pender } from 'redux-pender';
+import * as api from '../lib/api';
 
 // ACTION_TYPE
-const GET_ALL_MACHINES = "machine/GET_ALL_MACHINES";
-const GET_MACHINE = "machine/GET_MACHINE";
-const UPDATE_MACHINE = "machine/UPDATE_MACHINE";
-const UPDATE_MACHINE_SOCKET = "machine/UPDATE_MACHINE_SOCKET";
+const GET_ALL_MACHINES = 'machine/GET_ALL_MACHINES';
+const GET_MACHINE = 'machine/GET_MACHINE';
+const UPDATE_MACHINE = 'machine/UPDATE_MACHINE';
+const UPDATE_MACHINE_SOCKET = 'machine/UPDATE_MACHINE_SOCKET';
 
 // ACTIONS
 export const getAllMachines = createAction(GET_ALL_MACHINES, api.getAllMachines);
@@ -24,11 +23,11 @@ const initialState = {
 };
 
 // REDUCER
-const rmap = (o_ary, k, n_e) =>
-	o_ary.map(e => (e.id === k ? { ...e, ...n_e } : e));
+const rmap = (oAry, k, nE) =>
+	oAry.map(e => (e.id === k ? { ...e, ...nE } : e));
 
 export default handleActions(
-	{   
+	{
 		...pender({
 			type: GET_ALL_MACHINES,
 			onSuccess: (state, action) => ({...state, fetched: true, fetching: false, data: action.payload.data}),
@@ -46,7 +45,7 @@ export default handleActions(
 			onSuccess: (state, action) => ({...state, fetched: true, fetching: false, data: rmap(state.data, action.payload.data.id, action.payload.data)}),
 			onPending: (state, action) => ({ ...state, fetching: true }),
 			onFailure: (state, action) => ({...state, error: action.payload.error})
-    	}),
+		}),
 
 		[UPDATE_MACHINE_SOCKET]: (state, action) => ({...state, data: rmap(state.data, action.payload.id, action.payload.data)})
 	},
